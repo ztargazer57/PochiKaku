@@ -9,7 +9,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-[#3e2c23] text-[#f5efe6] flex flex-col p-6">
+    <aside className="w-64 sticky top-0 bg-[#3e2c23] text-[#f5efe6] flex flex-col p-6">
       <h1 className="text-2xl font-bold mb-8">PochiKaku</h1>
       <nav className="flex flex-col space-y-4">
         {navLinks.map(({ title, href }) => (
