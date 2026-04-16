@@ -171,7 +171,7 @@ export default function EventsPage() {
         setJoiningEventId(null);
       }
     },
-    [joiningEventId, markEventAsJoined],
+    [joiningEventId, markEventAsJoined, loadEvents],
   );
 
   return (
@@ -182,7 +182,12 @@ export default function EventsPage() {
         <EventCreationModal
           isOpen={isCreateModalOpen}
           onClose={closeCreateModal}
-          onCreated={handleCreated}
+          onCreated={(createdEvent) =>
+            handleCreated({
+              ...createdEvent,
+              joined: false,
+            })
+          }
         />
 
         <ViewEventModal

@@ -14,7 +14,9 @@ type PostItem = {
   description: string;
   image: string;
   artist: string;
+  artistId: string;
   avatar: string;
+  time: string;
   likes: number;
   comments: number;
   userId: string;
@@ -121,7 +123,7 @@ export default function HomePage() {
       )}
 
       <section className="p-4 ml-4 mr-4">
-        <h3 className="mb-6 text-2xl font-bold">Recent Uploads</h3>
+        <h3 className="mb-6 text-2xl font-bold">Your Recent Uploads</h3>
 
         {isLoading ? (
           <p className="text-[#5a4636]">Loading your recent uploads...</p>

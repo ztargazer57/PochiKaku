@@ -5,7 +5,7 @@ export default function Sidebar() {
     { title: "Home", href: "/homepage" },
     { title: "Gallery", href: "/gallery" },
     { title: "Events", href: "/events" },
-    { title: "Settings", href: "/settings" }, // placeholder
+    { title: "Profile", href: "/profile" },
   ];
 
   return (

@@ -1,28 +1,74 @@
 "use client";
+
+import { useMemo } from "react";
 import Masonry from "react-masonry-css";
 import ArtCard from "./ArtCard";
 
-const breakpointColumnsObj = {
+export type GalleryItem = {
+  id: string;
+  title: string;
+  artist: string;
+  artistId: string;
+  avatar: string;
+  img: string;
+  description: string;
+  createdAt: string;
+};
+
+type GalleryGridProps = {
+  items?: GalleryItem[];
+  onSelect?: (art: GalleryItem) => void;
+};
+
+const BREAKPOINT_COLUMNS = {
   default: 5,
   1024: 3,
   768: 2,
   640: 1,
 };
 
-export default function GalleryGrid({ items, onSelect }: GalleryGridProps) {
+export default function GalleryGrid({
+  items = [],
+  onSelect,
+}: GalleryGridProps) {
+  const safeItems = useMemo(() => {
+    return items.filter(
+      (art): art is GalleryItem =>
+        Boolean(
+          art &&
+            typeof art.id === "string" &&
+            typeof art.title === "string" &&
+            typeof art.artist === "string" &&
+            typeof art.artistId === "string" &&
+            typeof art.avatar === "string" &&
+            typeof art.img === "string" &&
+            typeof art.description === "string" &&
+            typeof art.createdAt === "string"
+        )
+    );
+  }, [items]);
+
+  if (safeItems.length === 0) {
+    return (
+      <div className="rounded-xl border border-[#d7cab9] bg-[#f5efe6] p-6 text-center text-[#5a4636]">
+        No artworks found.
+      </div>
+    );
+  }
+
   return (
     <Masonry
-      breakpointCols={breakpointColumnsObj}
+      breakpointCols={BREAKPOINT_COLUMNS}
       className="flex gap-6"
       columnClassName="space-y-6"
     >
-      {items.map((art) => (
+      {safeItems.map((art) => (
         <ArtCard
           key={art.id}
           title={art.title}
           artist={art.artist}
           img={art.img}
-          onClick={() => onSelect?.(art)}
+          onClick={onSelect ? () => onSelect(art) : undefined}
         />
       ))}
     </Masonry>

@@ -230,12 +230,26 @@ export async function POST(request: Request) {
       );
     }
 
-    if (deadline < startDate) {
-      return NextResponse.json(
-        { error: "Deadline cannot be earlier than start date." },
-        { status: 400 },
-      );
-    }
+  if (!startDate) {
+  return NextResponse.json(
+    { error: "Start date is required." },
+    { status: 400 },
+  );
+  }
+
+  if (!deadline) {
+    return NextResponse.json(
+      { error: "Deadline is required." },
+      { status: 400 },
+    );
+  }
+
+  if (deadline < startDate) {
+    return NextResponse.json(
+      { error: "Deadline cannot be earlier than start date." },
+      { status: 400 },
+    );
+  }
 
     const backdropValidationError = validateImageFile(
       backdropImageEntry,

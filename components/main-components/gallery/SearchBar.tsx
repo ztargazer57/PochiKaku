@@ -1,15 +1,18 @@
 "use client";
-import { FaSearch } from "react-icons/fa";
 
-export default function SearchBar({ placeholder = "Search artworks..." }) {
+type SearchBarProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <div className="relative w-80">
-      <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5a4636]" />
-      <input
-        type="text"
-        placeholder={placeholder}
-        className="w-full pl-10 pr-4 py-2 rounded-lg border border-[#5a4636] bg-[#e8dfd3] focus:outline-none"
-      />
-    </div>
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Search artworks or artists..."
+      className="w-full max-w-sm rounded-xl border border-[#d7cab9] bg-white px-4 py-2 text-[#3e2c23] outline-none focus:border-[#5a4636]"
+    />
   );
 }
