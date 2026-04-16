@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { UploadApiResponse } from "cloudinary";
+import { getCurrentUserFromToken } from "@/lib/auth/auth";
 import { getCurrentUser } from "@/lib/current-user";
 import { prisma } from "@/lib/prisma";
 import { cloudinary } from "@/lib/cloudinary";

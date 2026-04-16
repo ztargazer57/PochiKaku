@@ -156,7 +156,7 @@ export default function ArtCard({ post }: { post: Post }) {
 
   return (
     <>
-      <div className="relative w-[940px] max-w-full overflow-hidden rounded-2xl bg-white shadow-md transition-shadow hover:shadow-lg">
+      <div className="relative w-[940px] mx-auto max-w-full overflow-hidden rounded-2xl bg-white shadow-md transition-shadow hover:shadow-lg">
         <div className="flex items-start justify-between border-b border-[#e8dfd3] p-4">
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full">
