@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface EventReferenceImage {
   id: string;
@@ -17,6 +18,7 @@ interface ViewEventModalProps {
   isOpen: boolean;
   onClose: () => void;
   event: {
+    id: string;
     title: string;
     description: string;
     img: string;
@@ -38,6 +40,8 @@ export default function ViewEventModal({
   hasJoined = false,
   isJoining = false,
 }: ViewEventModalProps) {
+  const router = useRouter();
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -63,14 +67,19 @@ export default function ViewEventModal({
     event.status === "Ongoing"
       ? "bg-green-100 text-green-700 border border-green-200"
       : event.status === "Upcoming"
-      ? "bg-blue-100 text-blue-700 border border-blue-200"
-      : "bg-gray-200 text-gray-700 border border-gray-300";
+        ? "bg-blue-100 text-blue-700 border border-blue-200"
+        : "bg-gray-200 text-gray-700 border border-gray-300";
 
   const getJoinButtonText = () => {
     if (isJoining) return "Joining...";
     if (hasJoined) return "Already Joined";
     if (isEnded) return "Event Ended";
     return "Join Event";
+  };
+
+  const handleVisitEvent = () => {
+    router.push(`/events/${event.id}`);
+    onClose();
   };
 
   return (
@@ -168,9 +177,7 @@ export default function ViewEventModal({
                     ))}
                   </div>
                 ) : (
-                  <p className="text-sm text-[#8a6f5a]">
-                    No participants yet.
-                  </p>
+                  <p className="text-sm text-[#8a6f5a]">No participants yet.</p>
                 )}
               </div>
 
@@ -221,6 +228,14 @@ export default function ViewEventModal({
                 className="rounded-xl border border-[#b8a28d] px-4 py-2.5 text-sm font-medium text-[#5a4636] transition hover:bg-[#eadfd2]"
               >
                 Close
+              </button>
+
+              <button
+                type="button"
+                onClick={handleVisitEvent}
+                className="rounded-xl bg-[#8a6f5a] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#735b49]"
+              >
+                Visit Event
               </button>
 
               <button
