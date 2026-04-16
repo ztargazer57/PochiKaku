@@ -60,9 +60,12 @@ export default function EventSubmissionCard({
         />
       </div>
 
-      <div className="border-t border-[#e8dfd3] px-4 py-3">
+      <div className="border-t border-[#e8dfd3] px-4 py-3 flex">
         <p className="line-clamp-2 text-sm font-semibold text-[#3e2c23] sm:text-base">
           {submission.post.title || "Untitled Submission"}
+        </p>
+        <p className="ml-auto text-xs text-[#8a6f5a] sm:text-sm">
+            {submission.user.username || "Unknown User"}
         </p>
       </div>
     </button>
